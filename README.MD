@@ -1,5 +1,5 @@
 # Memory Game
-#Gra posiada dwa tryby:
+Game has two modes :
 1. easy 
   - table 4,2 - 4 random words, duplicated, mixed and hidden under the appropriate fields
   - user has 10 chances to guess all the words
