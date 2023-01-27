@@ -1,4 +1,4 @@
-#Memory Game
+# Memory Game
 #Gra posiada dwa tryby:
 1. easy 
   - table 4,2 - 4 random words, duplicated, mixed and hidden under the appropriate fields
