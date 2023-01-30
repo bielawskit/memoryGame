@@ -14,6 +14,8 @@ class Game(Board, Score):
     chosen_words = []
     word_place = {}
     start_time = time.time()
+    guess_words = []
+    guess_word = {}
 
     def load_words(self):
         # open and load file content to list "words"
@@ -32,6 +34,7 @@ class Game(Board, Score):
                     self.chosen_words.append(random.choice(word))
         self.chosen_words = self.chosen_words * len(self.num)
         random.shuffle(self.chosen_words)
+        print(f"Choosen words : {self.chosen_words}")
 
     def hide_words(self):
         # iterate over the columns, rows and hide words 
@@ -51,32 +54,44 @@ class Game(Board, Score):
                     self.end_time = time.time()
                     self.add_person()
                     break
+
                 print(f"Number of attemps: {self.number_of_attempts}")
                 move_1 = input("Give us the location (np. A1): ")
+
+                if self.word_place[move_1] in self.guess_words:
+                    print("This place is not available. Give different location.")
+                    move_1 = input("Give us the location (np. A1): ")
+
                 # guess the word
                 if move_1 in self.word_place.keys():
                     self.matrix_size[int(move_1[1])][self.letters.index(move_1[0])] = self.word_place[move_1]
                     self.drawn_board()
+
                 # guess the second word
                 move_2 = input("Give us the location (np. A2): ")
-                if move_1 in self.word_place.keys() and move_2 in self.word_place.keys():
-                    # checking if two words are the same
-                    self.matrix_size[int(move_2[1])][self.letters.index(move_2[0])] = self.word_place[move_2]
-                    self.drawn_board()
-                    if self.word_place[move_1] == self.word_place[move_2]:
-                        print("Correct. Good job.")
-                    else:
-                        self.matrix_size[int(move_1[1])][self.letters.index(move_1[0])] = "_"
-                        self.matrix_size[int(move_2[1])][self.letters.index(move_2[0])] = "_"
-                        print("Maybe next time.")
-                        print('*' * 20)
-                        print('*' * 20)
-                        print('*' * 20)
-                        print('*' * 20)
-                        print('*' * 20)
+                if move_2 != move_1:
 
+                    if move_1 in self.word_place.keys() and move_2 in self.word_place.keys():
+                        # checking if two words are the same
+                        self.matrix_size[int(move_2[1])][self.letters.index(move_2[0])] = self.word_place[move_2]
+                        self.guess_words.append(self.word_place[move_2])
                         self.drawn_board()
-                    self.number_of_attempts -= 1
+
+                        if self.word_place[move_1] == self.word_place[move_2]:
+                            print("Correct. Good job.")
+
+                        else:
+                            self.matrix_size[int(move_1[1])][self.letters.index(move_1[0])] = "_"
+                            self.matrix_size[int(move_2[1])][self.letters.index(move_2[0])] = "_"
+                            print("Maybe next time.")
+                            print('*' * 20)
+                            print('*' * 20)
+                            print('*' * 20)
+                            print('*' * 20)
+                            print('*' * 20)
+
+                            self.drawn_board()
+                        self.number_of_attempts -= 1
             else:
                 print(f"Number of attempts: {self.number_of_attempts}. Try one more. ;)")
                 break
