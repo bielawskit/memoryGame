@@ -50,12 +50,12 @@ class Game(Board, Score):
         while True:
             if self.number_of_attempts >= 0:
                 if '_' not in [cell for row in self.matrix_size for cell in row]:
-                    print("Contragulation. You won. ;)")
+                    print("Congratulation. You won. ;)")
                     self.end_time = time.time()
                     self.add_person()
                     break
 
-                print(f"Number of attemps: {self.number_of_attempts}")
+                print(f"Number of attempts: {self.number_of_attempts}")
                 move_1 = input("Give us the location (np. A1): ")
 
                 if self.word_place[move_1] in self.guess_words:
