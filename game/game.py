@@ -34,7 +34,7 @@ class Game(Board, Score):
                     self.chosen_words.append(random.choice(word))
         self.chosen_words = self.chosen_words * len(self.num)
         random.shuffle(self.chosen_words)
-        print(f"Choosen words : {self.chosen_words}")
+        # print(f"Chosen words : {self.chosen_words}")
 
     def hide_words(self):
         # iterate over the columns, rows and hide words 
@@ -44,7 +44,7 @@ class Game(Board, Score):
                 self.word_place[f"{letter}{number}"] = self.chosen_words[counter]
                 counter += 1
 
-        print(self.word_place)
+        # print(self.word_place)
 
     def start_game(self):
         while True:
@@ -92,6 +92,8 @@ class Game(Board, Score):
 
                             self.drawn_board()
                         self.number_of_attempts -= 1
+                else:
+                    print("Two times the same location. Try one more.")
             else:
                 print(f"Number of attempts: {self.number_of_attempts}. Try one more. ;)")
                 break
